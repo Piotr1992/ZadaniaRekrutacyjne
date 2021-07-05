@@ -1,6 +1,9 @@
 package StudentPresences;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainClass {
 
@@ -30,28 +33,20 @@ public class MainClass {
         listPresencesZygmundRaczek.put("Thursday", 0);
         listPresencesZygmundRaczek.put("Friday", 1);
 
-        Presence studentJanKowalski = new Presence(new Student("Jan", "Kowalski"), listPresencesJanKowalski);
-        Presence studentEwaNowak = new Presence(new Student("Ewa", "Nowak"), listPresencesEwaNowak);
-        Presence studentZygmundRaczek = new Presence(new Student("Zygmund", "Raczek"), listPresencesZygmundRaczek);
+        Map<Student, Map<String, Integer>> listPresencesStudents = new HashMap<Student, Map<String, Integer>>();
+        listPresencesStudents.put(new Student("Jan", "Kowalski"), listPresencesJanKowalski);
+        listPresencesStudents.put(new Student("Ewa", "Nowak"), listPresencesEwaNowak);
+        listPresencesStudents.put(new Student("Zygmund", "Raczek"), listPresencesZygmundRaczek);
 
-        List<Presence> presenceList = new ArrayList<>();
-
-//      uczeniowe dołączyli do klasy
-        presenceList.add(studentJanKowalski);
-        presenceList.add(studentEwaNowak);
-        presenceList.add(studentZygmundRaczek);
-
-//      uczeń odszedł z klasy
-        presenceList.remove(studentJanKowalski);
-
-//      wyświetlenie na ekran
-        for (Presence presence: presenceList) {
-            System.out.println(presence.getStudent().getFirstName() + " " + presence.getStudent().getLastName());
-            for (Map.Entry<String, Integer> entry : presence.getListPresence().entrySet()) {
-                System.out.println(entry.getKey() + " " + entry.getValue());
+        for (Map.Entry<Student, Map<String, Integer>> entry : listPresencesStudents.entrySet()) {
+            System.out.println(entry.getKey().getFirstName() + " " + entry.getKey().getLastName());
+            for (Map.Entry<String, Integer> entryWew : entry.getValue().entrySet()) {
+                System.out.println(entryWew.getKey() + ": " + entryWew.getValue());
             }
-            System.out.println("\n");
+            System.out.println();
         }
+
+
 
     }
 
